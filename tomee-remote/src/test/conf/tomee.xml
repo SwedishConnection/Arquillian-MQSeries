@@ -21,17 +21,17 @@
 		class-name="com.ibm.mq.connector.outbound.ManagedConnectionFactoryImpl">
 		TransactionSupport=none
 		ResourceAdapter=wmqRA
-		HostName=bv-mq-01.system.bolagsverket.se
-		Port=1414
-		QueueManager=SVLNT03P
-		Channel=SVLNT03PChannel
+		HostName=**
+		Port=**
+		QueueManager=**
+		Channel=**
 		TransportType=Client
 	</Resource>
 
 	<Resource id="queue" type="javax.jms.Queue"
 		class-name="com.ibm.mq.connector.outbound.MQQueueProxy">
-		baseQueueManagerName=SVLNT03P
-		baseQueueName=LQ.INFUTD_MEDDELANDE_V2
+		baseQueueManagerName=**
+		baseQueueName=**
 		targetClient=JMS
 	</Resource>
 </tomee>
