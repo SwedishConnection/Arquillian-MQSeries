@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+	<Resource id="wmqRA" type="com.ibm.mq.connector.ResourceAdapterImpl"
+		class-name="com.ibm.mq.connector.ResourceAdapterImpl">
+		connectionConcurrency=5
+		maxConnections=10
+		logWriterEnabled=true
+		reconnectionRetryCount=5
+		reconnectionRetryInterval=300000
+		traceEnabled=false
+		traceLevel=3
+	</Resource>
+
+	<Container id="wmq" type="MESSAGE">
+		ResourceAdapter=wmqRA
+		MessageListenerInterface=javax.jms.MessageListener
+		ActivationSpecClass=com.ibm.mq.connector.inbound.ActivationSpecImpl
+	</Container>
+
+	<Resource id="qcf" type="javax.jms.ConnectionFactory"
+		class-name="com.ibm.mq.connector.outbound.ManagedConnectionFactoryImpl">
+		TransactionSupport=none
+		ResourceAdapter=wmqRA
+		HostName=bv-mq-01.system.bolagsverket.se
+		Port=1414
+		QueueManager=SVLNT03P
+		Channel=SVLNT03PChannel
+		TransportType=Client
+	</Resource>
+
+	<Resource id="queue" type="javax.jms.Queue"
+		class-name="com.ibm.mq.connector.outbound.MQQueueProxy">
+		baseQueueManagerName=SVLNT03P
+		baseQueueName=LQ.INFUTD_MEDDELANDE_V2
+		targetClient=JMS
+	</Resource>
+</tomee>
